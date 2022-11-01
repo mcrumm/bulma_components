@@ -1,6 +1,6 @@
 # BulmaComponents
 
-**TODO: Add description**
+HEEx components for the [Bulma](https://bulma.io/) CSS framework.
 
 ## Installation
 
@@ -14,6 +14,12 @@ def deps do
   ]
 end
 ```
+
+## Contributing
+
+For those planning to contribute to this project, you can run the storybook with the following command:
+
+    $ mix dev
 
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
