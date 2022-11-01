@@ -2,5 +2,9 @@
 [
   import_deps: [:phoenix],
   plugins: [Phoenix.LiveView.HTMLFormatter],
-  inputs: ["*.{heex,ex,exs}", "{dev, mix,.formatter}.exs", "{config,lib,test}/**/*.{ex,exs}"]
+  inputs: [
+    "*.{heex,ex,exs}",
+    "{dev, mix,.formatter}.exs",
+    "{config,lib,storybook,test}/**/*.{ex,exs}"
+  ]
 ]
