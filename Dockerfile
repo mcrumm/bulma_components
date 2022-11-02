@@ -48,7 +48,7 @@ RUN mkdir config
 COPY config/config.exs config/
 RUN mix deps.compile
 
-COPY priv priv
+# COPY priv priv
 
 COPY lib lib
 
