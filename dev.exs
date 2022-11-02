@@ -1,11 +1,15 @@
 Application.put_env(:dart_sass, :storybook,
   args: ~w(--load-path=../deps/bulma css:../priv/static/assets),
-  cd: Path.expand("../assets", __DIR__)
+  cd: Path.expand("./assets", __DIR__)
 )
+
+secret_key_base =
+  System.get_env("SECRET_KEY_BASE") ||
+    "hQCHben5qR5i+rq4v9wpLblgq53dhHVocqNWMdfvPifjNfadRs+lCll9iHr0wdP9"
 
 Application.put_env(:bulma_components, BulmaComponentsWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "hQCHben5qR5i+rq4v9wpLblgq53dhHVocqNWMdfvPifjNfadRs+lCll9iHr0wdP9",
+  secret_key_base: secret_key_base,
   live_view: [signing_salt: "iwVHqspHd6Y"],
   http: [port: System.get_env("PORT") || 4000],
   render_errors: [formats: [html: BulmaComponentsWeb.ErrorHTML], layout: false],
