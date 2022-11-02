@@ -31,12 +31,14 @@ defmodule BulmaComponents.MixProject do
       # Component deps
       {:mime, "~> 1.6 or ~> 2.0"},
       {:phoenix_live_view, "~> 0.18.3"},
+      {:bulma, "~> 0.9.3"},
 
       # Dev/test dependencies
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phx_live_storybook, "~> 0.4.0", only: :dev},
       {:plug_cowboy, "~> 2.0", only: :dev},
-      {:jason, "~> 1.0", only: [:dev, :test]}
+      {:jason, "~> 1.0", only: [:dev, :test]},
+      {:dart_sass, "~> 0.5", only: [:dev, :test]}
     ]
   end
 end

@@ -1,3 +1,8 @@
+Application.put_env(:dart_sass, :storybook,
+  args: ~w(--load-path=../deps/bulma css:../priv/static/assets),
+  cd: Path.expand("../assets", __DIR__)
+)
+
 Application.put_env(:bulma_components, BulmaComponentsWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "hQCHben5qR5i+rq4v9wpLblgq53dhHVocqNWMdfvPifjNfadRs+lCll9iHr0wdP9",
@@ -7,7 +12,13 @@ Application.put_env(:bulma_components, BulmaComponentsWeb.Endpoint,
   debug_errors: true,
   check_origin: false,
   pubsub_server: BulmaComponents.PubSub,
-  watchers: [],
+  watchers: [
+    sass: {
+      DartSass,
+      :install_and_run,
+      [:storybook, ~w(--embed-source-map --source-map-urls=absolute --watch)]
+    }
+  ],
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
@@ -24,6 +35,7 @@ defmodule BulmaComponentsWeb.Storybook do
   use PhxLiveStorybook,
     otp_app: :bulma_components,
     content_path: Path.join([__DIR__, "storybook"]),
+    css_path: "/assets/storybook.css",
     sandbox_class: "bulma-components-web",
     title: "Bulma Components"
 end
@@ -42,7 +54,16 @@ defmodule BulmaComponentsWeb.Router do
 
   scope "/", BulmaComponentsWeb do
     pipe_through :browser
-    live_storybook("/", backend_module: BulmaComponentsWeb.Storybook)
+    get "/", NextController, :storybook
+    live_storybook("/storybook", backend_module: BulmaComponentsWeb.Storybook)
+  end
+end
+
+defmodule BulmaComponentsWeb.NextController do
+  use Phoenix.Controller
+
+  def storybook(conn, _) do
+    redirect(conn, to: "/storybook")
   end
 end
 
@@ -57,6 +78,12 @@ defmodule BulmaComponentsWeb.Endpoint do
 
   socket "/live", Phoenix.LiveView.Socket
   socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
+
+  plug Plug.Static,
+    at: "/",
+    from: :bulma_components,
+    gzip: false,
+    only: ~w(assets fonts images favicon.ico robots.txt)
 
   plug Phoenix.LiveReloader
   plug Phoenix.CodeReloader
