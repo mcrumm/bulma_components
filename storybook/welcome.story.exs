@@ -3,7 +3,7 @@ defmodule Storybook.MyPage do
   # documentation.
   use PhxLiveStorybook.Story, :page
 
-  def description, do: "Your very first steps into using Phoenix Storybook"
+  def description, do: "HEEx components for the Bulma CSS framework"
 
   # Declare an optional tab-based navigation in your page:
   def navigation do

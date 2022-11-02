@@ -159,7 +159,7 @@ defmodule Storybook.Components.Button do
           end
       },
       %VariationGroup{
-        id: :icons_spans,
+        id: :icons_with_text,
         variations:
           for size <- [:small, nil, :medium, :large] do
             %Variation{
