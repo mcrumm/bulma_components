@@ -21,7 +21,7 @@ For those planning to contribute to this project, you can run the storybook with
 
     $ mix dev
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/bulma_components>.
+## License
+
+MIT License. Copyright (c) 2022 Michael A. Crumm Jr.
 
