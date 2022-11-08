@@ -14,11 +14,7 @@ defmodule BulmaComponents.MixProject do
       deps: deps(),
       package: package(),
       docs: docs(),
-      aliases: [
-        dev: "run --no-halt dev.exs"
-      ],
       preferred_cli_env: [
-        dev: :dev,
         docs: :docs,
         "hex.publish": :docs
       ]
@@ -35,17 +31,12 @@ defmodule BulmaComponents.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # Component deps
+      # Component dependencies
       {:mime, "~> 1.6 or ~> 2.0"},
       {:phoenix_live_view, "~> 0.18.3"},
       {:bulma, "~> 0.9.3"},
-
       # Dev/test dependencies
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phx_live_storybook, "~> 0.4.0", only: :dev},
-      {:plug_cowboy, "~> 2.0", only: :dev},
       {:jason, "~> 1.0", only: [:dev, :test]},
-      {:dart_sass, "~> 0.5", only: [:dev, :test, :docs]},
       {:ex_doc, "~> 0.29", only: :docs}
     ]
   end

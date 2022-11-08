@@ -19,7 +19,7 @@ end
 
 For those planning to contribute to this project, you can run the storybook with the following command:
 
-    $ mix dev
+    $ cd storybook; mix phx.server
 
 ## License
 
