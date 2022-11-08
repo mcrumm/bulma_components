@@ -52,6 +52,10 @@ RUN cd storybook && mix deps.compile
 
 COPY storybook/priv storybook/priv
 
+COPY storybook/lib storybook/lib
+
+COPY storybook/storybook storybook/storybook
+
 COPY storybook/assets storybook/assets
 
 # Compile the assets + the app
