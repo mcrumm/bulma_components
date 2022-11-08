@@ -24,7 +24,7 @@ jobs:
     strategy:
       matrix:
         elixir: ["1.14.0"]
-        otp: ["24.3.4.3"]
+        otp: ["24.3.4.5"]
 
     steps:
       - name: Checkout repository
