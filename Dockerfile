@@ -35,34 +35,34 @@ RUN mix local.hex --force && \
 # set build ENV
 ENV MIX_ENV="prod"
 
+# copy component dependencies
+COPY mix.exs ./
+COPY lib lib
+
 # install mix dependencies
-COPY mix.exs mix.lock ./
-RUN mix deps.get --only $MIX_ENV
-RUN mkdir config
+RUN mkdir -p storybook/config
+COPY storybook/mix.exs storybook/mix.lock storybook/
+RUN cd storybook && mix deps.get --only $MIX_ENV
 
 # copy compile-time config files before we compile dependencies
 # to ensure any relevant config change will trigger the dependencies
 # to be re-compiled.
-COPY config/config.exs config/${MIX_ENV}.exs config/
-RUN mix deps.compile
+COPY storybook/config/config.exs storybook/config/${MIX_ENV}.exs storybook/config/
+RUN cd storybook && mix deps.compile
 
-COPY priv priv
+COPY storybook/priv storybook/priv
 
-COPY lib lib
+COPY storybook/assets storybook/assets
 
-COPY assets assets
+# Compile the assets + the app
+RUN cd storybook && mix assets.deploy && mix compile
 
-# compile assets
-RUN mix assets.deploy
+# Note: changes to config/runtime.exs don't require recompiling the code
+COPY storybook/config/runtime.exs storybook/config/
 
 # Compile the release
-RUN mix compile
-
-# Changes to config/runtime.exs don't require recompiling the code
-COPY config/runtime.exs config/
-
-COPY rel rel
-RUN mix release
+COPY storybook/rel storybook/rel
+RUN cd storybook && mix release
 
 # start a new build stage so that the final image will only contain
 # the compiled release and other runtime necessities
@@ -85,7 +85,7 @@ RUN chown nobody /app
 ENV MIX_ENV="prod"
 
 # Only copy the final release from the build stage
-COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/bulma_components_storybook ./
+COPY --from=builder --chown=nobody:root /app/storybook/_build/${MIX_ENV}/rel/bulma_components_storybook ./
 
 USER nobody
 

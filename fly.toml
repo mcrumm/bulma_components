@@ -5,9 +5,6 @@ kill_signal = "SIGTERM"
 kill_timeout = 5
 processes = []
 
-[build]
-  dockerfile = "storybook/Dockerfile"
-
 [env]
   PHX_HOST = "phx-bulma-components.fly.dev"
   PORT = "8080"
