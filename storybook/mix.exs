@@ -41,8 +41,8 @@ defmodule BulmaComponents.Storybook.MixProject do
       {:phx_live_storybook, "~> 0.4.0"},
       {:plug_cowboy, "~> 2.0"},
       {:jason, "~> 1.0"},
+      {:dart_sass, "~> 0.5", runtime: Mix.env() == :dev},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:dart_sass, "~> 0.5", only: [:dev, :test, :docs]},
       {:ex_doc, "~> 0.29", only: :docs}
     ]
   end
