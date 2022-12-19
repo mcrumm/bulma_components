@@ -1,5 +1,5 @@
 %{
-  "bulma": {:hex, :bulma, "0.9.3", "b1e88c650a8c7f93918450e0727cc0041f6d9ac0e180c7c9d2548fb81be651d3", [:mix], [], "hexpm", "79ceb30c94754e703711ed5b8d3446e640911a9853329c3d464b5ba4bc380dae"},
+  "bulma": {:hex, :bulma, "0.9.4", "c668580bbced104697d3ad244980ee82a9749454d2f3745e2c6830a5043d35be", [:mix], [], "hexpm", "e9115bc0698829bda94d3cbc6424bff73019af756c812b85dc00e51f7f3bd9b0"},
   "castore": {:hex, :castore, "0.1.18", "deb5b9ab02400561b6f5708f3e7660fc35ca2d51bfc6a940d2f513f89c2975fc", [:mix], [], "hexpm", "61bbaf6452b782ef80b33cdb45701afbcf0a918a45ebe7e73f1130d661e66a06"},
   "earmark_parser": {:hex, :earmark_parser, "1.4.29", "149d50dcb3a93d9f3d6f3ecf18c918fb5a2d3c001b5d3305c926cddfbd33355b", [:mix], [], "hexpm", "4902af1b3eb139016aed210888748db8070b8125c2342ce3dcae4f38dcc63503"},
   "ex_doc": {:hex, :ex_doc, "0.29.0", "4a1cb903ce746aceef9c1f9ae8a6c12b742a5461e6959b9d3b24d813ffbea146", [:mix], [{:earmark_parser, "~> 1.4.19", [hex: :earmark_parser, repo: "hexpm", optional: false]}, {:makeup_elixir, "~> 0.14", [hex: :makeup_elixir, repo: "hexpm", optional: false]}, {:makeup_erlang, "~> 0.1", [hex: :makeup_erlang, repo: "hexpm", optional: false]}], "hexpm", "f096adb8bbca677d35d278223361c7792d496b3fc0d0224c9d4bc2f651af5db1"},
