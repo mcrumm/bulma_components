@@ -1,7 +1,7 @@
 defmodule BulmaComponents.Storybook.MixProject do
   use Mix.Project
 
-  @version "0.0.1-alpha.1"
+  @version "0.1.0"
 
   @source_url "https://github.com/mcrumm/bulma_components"
 
@@ -38,12 +38,12 @@ defmodule BulmaComponents.Storybook.MixProject do
   defp deps do
     [
       {:bulma_components, path: Path.expand("../", __DIR__)},
-      {:phx_live_storybook, "~> 0.4.0"},
-      {:plug_cowboy, "~> 2.0"},
-      {:jason, "~> 1.0"},
-      {:dart_sass, "~> 0.5", runtime: Mix.env() == :dev},
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:ex_doc, "~> 0.29", only: :docs}
+      {:phoenix_storybook, "~> 0.6"},
+      {:plug_cowboy, "~> 2.6"},
+      {:jason, "~> 1.4"},
+      {:dart_sass, "~> 0.7", runtime: Mix.env() == :dev},
+      {:phoenix_live_reload, "~> 1.4", only: :dev},
+      {:ex_doc, "~> 0.31", only: :docs}
     ]
   end
 

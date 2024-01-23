@@ -5,6 +5,8 @@
   inputs: [
     "*.{heex,ex,exs}",
     "{dev, mix,.formatter}.exs",
-    "{config,lib,storybook,test}/**/*.{ex,exs}"
+    "{config,lib,storybook,test}/**/*.{ex,exs}",
+    "storybook/**/*.exs",
+    "storybook2/**/*.exs"
   ]
 ]
