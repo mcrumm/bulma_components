@@ -8,7 +8,6 @@
 import Config
 
 config :storybook,
-  ecto_repos: [Storybook.Repo],
   generators: [timestamp_type: :utc_datetime]
 
 # Configures the endpoint
@@ -20,7 +19,7 @@ config :storybook, StorybookWeb.Endpoint,
     layout: false
   ],
   pubsub_server: Storybook.PubSub,
-  live_view: [signing_salt: "dh4BcuzK"]
+  live_view: [signing_salt: "51FqZrXZ"]
 
 # Configures the mailer
 #
@@ -35,29 +34,23 @@ config :storybook, Storybook.Mailer, adapter: Swoosh.Adapters.Local
 config :esbuild,
   version: "0.17.11",
   default: [
-    args:
-      ~w(js/app.js  js/storybook.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
+    args: ~w(
+      js/app.js
+      js/storybook.js
+      --bundle
+      --target=es2017
+      --outdir=../priv/static/assets
+      --external:/fonts/* --external:/images/*
+    ),
     cd: Path.expand("../assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
 
-# Configure tailwind (the version is required)
-config :tailwind,
-  version: "3.3.2",
+config :dart_sass,
+  version: "1.70.0",
   default: [
-    args: ~w(
-      --config=tailwind.config.js
-      --input=css/app.css
-      --output=../priv/static/assets/app.css
-    ),
-    cd: Path.expand("../assets", __DIR__)
-  ],
-  storybook: [
-    args: ~w(
-          --config=tailwind.config.js
-          --input=css/storybook.css
-          --output=../priv/static/assets/storybook.css
-        ),
+    args:
+      ~w(css/app.scss:../priv/static/assets/app.css --load-path=../deps/bulma css:../priv/static/assets),
     cd: Path.expand("../assets", __DIR__)
   ]
 
@@ -71,21 +64,4 @@ config :phoenix, :json_library, Jason
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{config_env()}.exs"
-
-config :phoenix, :json_library, Jason
-
-config :dart_sass,
-  version: "1.70.0",
-  default: [
-    args: ~w(--load-path=../deps/bulma css:../priv/static/assets),
-    cd: Path.expand("../assets", __DIR__)
-  ]
-
-config :bulma_components_storybook, BulmaComponents.Storybook.Endpoint,
-  url: [host: "localhost"],
-  render_errors: [formats: [html: BulmaComponents.Storybook.ErrorHTML], layout: false],
-  pubsub_server: BulmaComponents.Storybook.PubSub,
-  live_view: [signing_salt: "iwVHqspHd6Y"]
-
 import_config "#{config_env()}.exs"

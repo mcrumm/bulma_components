@@ -4,7 +4,7 @@ import Config
 # you can enable the server option below.
 config :storybook, StorybookWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
-  secret_key_base: "fhgFUdXNM2RqECQOmPbQ1iGlY0NxN9amzELkawizAXSFliUISloBrx/zbVDIbW59",
+  secret_key_base: "Xb0H7fqWSJDYMEh+H12vlf3BO4zNfsuBs4whvW29Lw88EVVdJkvayEhooJUceO0I",
   server: false
 
 # In test we don't send emails.

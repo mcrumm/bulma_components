@@ -7,6 +7,6 @@
     "{dev, mix,.formatter}.exs",
     "{config,lib,storybook,test}/**/*.{ex,exs}",
     "storybook/**/*.exs",
-    "storybook2/**/*.exs"
+    "storybook/**/*.exs"
   ]
 ]
