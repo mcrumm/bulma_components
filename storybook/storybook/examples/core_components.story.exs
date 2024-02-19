@@ -33,7 +33,7 @@ defmodule Storybook.Examples.CoreComponents do
       List of users
       <:subtitle>Feel free to add any missing user!</:subtitle>
       <:actions>
-        <.button phx-click={show_modal("new-user-modal")}>Create user</.button>
+        <.button color={:primary} phx-click={show_modal("new-user-modal")}>Create user</.button>
       </:actions>
     </.header>
     <.table id="user-table" rows={@users}>
