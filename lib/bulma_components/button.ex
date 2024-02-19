@@ -45,6 +45,8 @@ defmodule BulmaComponents.Button do
   attr :focused, :boolean, default: false
   attr :active, :boolean, default: false
   attr :loading, :boolean, default: false
+  attr :disabled, :boolean, default: false
+
   # Rest
   attr :rest, :global, include: ~w(disabled)
 
@@ -56,7 +58,8 @@ defmodule BulmaComponents.Button do
     :hovered,
     :focused,
     :active,
-    :loading
+    :loading,
+    :disabled
   ]
 
   @is_value_attrs [
