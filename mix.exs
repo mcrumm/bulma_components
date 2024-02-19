@@ -32,11 +32,12 @@ defmodule BulmaComponents.MixProject do
   defp deps do
     [
       # Component dependencies
+      {:bulma, "~> 0.9.4"},
       {:gettext, "~> 0.24"},
       {:mime, "~> 2.0"},
       {:phoenix_live_view, "~> 0.20"},
-      {:bulma, "~> 0.9.4"},
       # Dev/test dependencies
+      {:credo, "~> 1.7", only: [:dev, :test]},
       {:jason, "~> 1.4", only: [:dev, :test]},
       {:ex_doc, "~> 0.31", only: :docs}
     ]
