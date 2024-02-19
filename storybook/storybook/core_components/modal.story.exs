@@ -1,8 +1,8 @@
 defmodule Storybook.CoreComponents.Modal do
   use PhoenixStorybook.Story, :component
-  alias StorybookWeb.CoreComponents
 
-  def function, do: &CoreComponents.modal/1
+  def function, do: &BulmaComponents.Components.modal/1
+  def imports, do: [{BulmaComponents.Elements, [button: 1]}]
   def imports, do: [{CoreComponents, [button: 1, hide_modal: 1, show_modal: 1]}]
 
   def template do
