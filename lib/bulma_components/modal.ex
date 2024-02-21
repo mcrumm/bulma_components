@@ -63,7 +63,6 @@ defmodule BulmaComponents.Modal do
         type="button"
         aria-label="close"
       >
-        <.icon name="hero-x-mark-solid" class="h-5 w-5" />
       </button>
     </div>
     """
