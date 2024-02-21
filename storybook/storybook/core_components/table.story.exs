@@ -1,7 +1,8 @@
 defmodule Storybook.CoreComponents.Table do
   use PhoenixStorybook.Story, :component
+  alias BulmaComponents.Table
 
-  def function, do: &StorybookWeb.Components.Table.table/1
+  def function, do: &Table.table/1
 
   @rows [
     %{first_name: "Jean", last_name: "Dupont", city: "Paris"},
