@@ -101,13 +101,7 @@ defmodule BulmaComponents.Input do
     <div phx-feedback-for={@name} class="field">
       <.label for={@id}><%= @label %></.label>
       <div class="control">
-        <select
-          id={@id}
-          name={@name}
-          class="mt-2 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:border-zinc-400 focus:ring-0 sm:text-sm"
-          multiple={@multiple}
-          {@rest}
-        >
+        <select id={@id} name={@name} multiple={@multiple} {@rest}>
           <option :if={@prompt} value=""><%= @prompt %></option>
           <%= Form.options_for_select(@options, @value) %>
         </select>
@@ -126,17 +120,13 @@ defmodule BulmaComponents.Input do
 
   def input(%{type: "textarea"} = assigns) do
     ~H"""
-    <div phx-feedback-for={@name}>
-      <.label for={@id}><%= @label %></.label>
-      <textarea
-        id={@id}
-        name={@name}
-        class={[
-          @errors == [] && "border-zinc-300 focus:border-zinc-400",
-          @errors != [] && "border-rose-400 focus:border-rose-400"
-        ]}
-        {@rest}
-      ><%= Form.normalize_value("textarea", @value) %></textarea>
+    <div class="field" phx-feedback-for={@name}>
+      <div class={control_classes(assigns)}>
+        <.label for={@id}><%= @label %></.label>
+        <textarea id={@id} name={@name} class={input_classes(assigns)} {@rest}>
+        <%= Form.normalize_value("textarea", @value) %>
+      </textarea>
+      </div>
       <.error :for={msg <- @errors}><%= msg %></.error>
     </div>
     """
@@ -145,19 +135,18 @@ defmodule BulmaComponents.Input do
   # All other inputs text, datetime-local, url, password, etc. are handled here...
   def input(assigns) do
     ~H"""
-    <div phx-feedback-for={@name}>
-      <.label for={@id}><%= @label %></.label>
-      <input
-        type={@type}
-        name={@name}
-        id={@id}
-        value={Form.normalize_value(@type, @value)}
-        class={[
-          @errors == [] && "border-zinc-300 focus:border-zinc-400",
-          @errors != [] && "border-rose-400 focus:border-rose-400"
-        ]}
-        {@rest}
-      />
+    <div class="field" phx-feedback-for={@name}>
+      <div class={control_classes(assigns)}>
+        <.label for={@id}><%= @label %></.label>
+        <input
+          type={@type}
+          name={@name}
+          id={@id}
+          value={Form.normalize_value(@type, @value)}
+          class={input_classes(assigns)}
+          {@rest}
+        />
+      </div>
       <.error :for={msg <- @errors}><%= msg %></.error>
     </div>
     """
@@ -171,7 +160,7 @@ defmodule BulmaComponents.Input do
 
   def label(assigns) do
     ~H"""
-    <label for={@for} class="block text-sm font-semibold leading-6 text-zinc-800">
+    <label for={@for} class="label">
       <%= render_slot(@inner_block) %>
     </label>
     """
@@ -223,4 +212,27 @@ defmodule BulmaComponents.Input do
   def translate_errors(errors, field) when is_list(errors) do
     for {^field, {msg, opts}} <- errors, do: translate_error({msg, opts})
   end
+
+  defp input_classes(assigns) do
+    ["input"] ++
+      error_classes(assigns.errors) ++
+      icon_classes(assigns.icon, assigns.icon_align)
+  end
+
+  defp control_classes(assigns) do
+    ["control"] ++
+      control_icon_classes(assigns.icon, assigns.errors, assigns.icon_align)
+  end
+
+  defp control_icon_classes(nil, [], _), do: []
+  defp control_icon_classes(_, _, :left), do: ["has-icons-left", "has-icons-right"]
+  defp control_icon_classes(_, _, :right), do: ["has-icons-right"]
+  defp control_icon_classes(nil, _, _), do: []
+
+  defp error_classes([]), do: []
+  defp error_classes(_), do: ["is-danger"]
+
+  defp icon_classes(nil, _), do: []
+  defp icon_classes(_, :left), do: ["is-left"]
+  defp icon_classes(_, :right), do: ["is-right"]
 end
