@@ -19,10 +19,10 @@ defmodule Storybook.Components.Button do
   defp color_variation_groups do
     [
       %VariationGroup{
-        id: :colors_rgb,
+        id: :colors_theme,
         description: "Colors",
         variations:
-          for color <- Colors.rgb() do
+          for color <- Colors.theme() do
             %Variation{
               id: :"btn_#{color}",
               attributes: %{color: color},
@@ -34,7 +34,7 @@ defmodule Storybook.Components.Button do
         id: :colors_light,
         description: "Colors: Light",
         variations:
-          for color <- Colors.rgb() do
+          for color <- Colors.theme() do
             %Variation{
               id: :"btn_#{color}",
               attributes: %{color: color, light: true},
@@ -96,7 +96,7 @@ defmodule Storybook.Components.Button do
           id: :"styles_#{style}",
           description: "Styles: #{name}",
           variations:
-            for color <- Colors.rgb() do
+            for color <- Colors.theme() do
               %Variation{
                 id: :"btn_style_#{style}_#{color}",
                 attributes: %{style => true, color: color},
@@ -112,7 +112,7 @@ defmodule Storybook.Components.Button do
           id: :styles_invert_outlined,
           description: "Styles: Invert Outlined",
           variations:
-            for color <- Colors.rgb() do
+            for color <- Colors.theme() do
               %Variation{
                 id: :"btn_style_outlined_#{color}",
                 attributes: %{inverted: true, outlined: true, color: color},
@@ -131,7 +131,7 @@ defmodule Storybook.Components.Button do
         id: :"states_#{state}",
         description: name,
         variations:
-          for color <- [nil | Colors.rgb()] do
+          for color <- [nil | Colors.theme()] do
             %Variation{
               id: :"btn_state_hover_#{color}",
               attributes: if(color, do: %{state => true, color: color}, else: %{state => true}),

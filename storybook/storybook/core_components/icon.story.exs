@@ -77,7 +77,7 @@ defmodule Storybook.Components.Icon do
         id: :colors,
         description: "Colors",
         variations:
-          for color <- Colors.rgb() do
+          for color <- Colors.theme() do
             %Variation{
               id: :"icon_#{color}",
               attributes: %{

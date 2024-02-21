@@ -1,5 +1,5 @@
 defmodule BulmaComponents.Colors do
-  @rgb [
+  @theme [
     :primary,
     :link,
     :info,
@@ -17,7 +17,7 @@ defmodule BulmaComponents.Colors do
     :ghost
   ]
 
-  @colors @rgb ++ @monochrome
+  @colors @theme ++ @monochrome
 
   @doc """
   Returns a list of Bulma `$colors` as atoms.
@@ -40,12 +40,12 @@ defmodule BulmaComponents.Colors do
   def monochrome, do: @monochrome
 
   @doc """
-  Returns a list of rgb colors as atoms.
+  Returns a list of theme colors as atoms.
 
   ## Examples
 
-      iex> CoreComponents.rgb()
-      #{inspect(@rgb)}
+      iex> CoreComponents.theme()
+      #{inspect(@theme)}
   """
-  def rgb, do: @rgb
+  def theme, do: @theme
 end
