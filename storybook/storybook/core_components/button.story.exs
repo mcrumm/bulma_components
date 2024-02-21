@@ -1,4 +1,4 @@
-defmodule Storybook.Components.Button do
+defmodule Storybook.CoreComponents.Button do
   use PhoenixStorybook.Story, :component
   alias BulmaComponents.{Button, Colors}
   alias Phoenix.Naming
