@@ -1,16 +1,20 @@
 defmodule Storybook.CoreComponents.Modal do
   use PhoenixStorybook.Story, :component
 
-  def function, do: &BulmaComponents.Components.modal/1
-  def imports, do: [{BulmaComponents.Elements, [button: 1]}]
-  def imports, do: [{CoreComponents, [button: 1, hide_modal: 1, show_modal: 1]}]
+  def function, do: &BulmaComponents.Modal.modal/1
+
+  def imports,
+    do: [
+      {BulmaComponents.Button, [button: 1]},
+      {BulmaComponents.Modal, [hide_modal: 1, show_modal: 1]}
+    ]
 
   def template do
     """
-    <.button phx-click={show_modal(":variation_id")} psb-code-hidden>
+    <.psb-variation/>
+      <.button phx-click={show_modal(":variation_id")} psb-code-hidden>
       Open modal
     </.button>
-    <.psb-variation/>
     """
   end
 
@@ -18,7 +22,13 @@ defmodule Storybook.CoreComponents.Modal do
     [
       %Variation{
         id: :default,
-        slots: ["Modal body"]
+        slots: [
+          """
+          <div class='block'>
+            Modal body
+          </div>
+          """
+        ]
       }
     ]
   end
