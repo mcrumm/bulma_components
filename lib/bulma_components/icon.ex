@@ -13,14 +13,16 @@ defmodule BulmaComponents.Icon do
   attr :class, :string, default: nil
   attr :color, :string, default: nil
   attr :size, :atom, default: nil, values: [nil, :small, :normal, :medium, :large]
+  attr :align, :atom, default: nil, values: [nil, :left, :right]
   attr :title, :string, default: nil
   attr :fixed_width, :boolean, default: false
   attr :bordered, :boolean, default: false
   attr :spin, :boolean, default: false
+  attr :rest, :global, doc: "the arbitrary HTML attributes to add to the flash container"
 
   def icon(%{title: nil} = assigns) do
     ~H"""
-    <span class={icon_classes(assigns)}>
+    <span class={icon_classes(assigns)} {@rest}>
       <i class={["fas", "fa-#{@name}"]}></i>
     </span>
     """
@@ -28,7 +30,7 @@ defmodule BulmaComponents.Icon do
 
   def icon(%{title: title} = assigns) when title != nil do
     ~H"""
-    <span class={["icon-text"] ++ container_size_class(@size)}>
+    <span class={["icon-text"] ++ container_size_class(@size)} {@rest}>
       <span class={icon_classes(assigns)}>
         <i class={["fas", "fa-#{@name}"]}></i>
       </span>
@@ -43,9 +45,13 @@ defmodule BulmaComponents.Icon do
       icon_size_class(assigns.size) ++
       fixed_width_class(assigns.fixed_width) ++
       bordered_class(assigns.bordered) ++
-      spin_class(assigns.spin)
+      spin_class(assigns.spin) ++
+      align_class(assigns.align)
   end
 
+  def align_class(nil), do: []
+  def align_class(:left), do: ["is-left"]
+  def align_class(:right), do: ["is-right"]
   def spin_class(false), do: []
   def spin_class(true), do: ["fa-pulse"]
   def bordered_class(false), do: []
