@@ -77,16 +77,19 @@ defmodule BulmaComponents.Input do
     ~H"""
     <div phx-feedback-for={@name} class="field">
       <div class="control">
-        <label class="checkbox"><%= @label %></label>
-        <input type="hidden" name={@name} value="false" />
-        <input type="checkbox" id={@id} name={@name} value="true" checked={@checked} {@rest} />
-        <.icon :if={@icon} name={@icon} align={@icon_align} />
-        <.icon
-          name="exclamation-triangle"
-          size={:small}
-          align={:right}
-          class="phx-no-feedback:hidden"
-        />
+        <label class="checkbox">
+          <input type="hidden" name={@name} value="false" />
+          <input
+            type="checkbox"
+            class="input"
+            id={@id}
+            name={@name}
+            value="true"
+            checked={@checked}
+            {@rest}
+          />
+          <%= @label %>
+        </label>
       </div>
       <.error :for={msg <- @errors}><%= msg %></.error>
     </div>
