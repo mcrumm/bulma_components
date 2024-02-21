@@ -18,7 +18,7 @@ defmodule Storybook.CoreComponents.Input do
       %VariationGroup{
         id: :basic_inputs,
         variations:
-          for type <- ~w(text textarea number date color range checkbox)a do
+          for type <- ~w(text email textarea number date color range checkbox)a do
             %Variation{
               id: type,
               attributes: %{
