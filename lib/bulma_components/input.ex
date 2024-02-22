@@ -263,7 +263,9 @@ defmodule BulmaComponents.Input do
   defp error_classes([]), do: []
   defp error_classes(_), do: ["is-danger"]
 
-  defp icon_classes(nil, _), do: []
-  defp icon_classes(_, :left), do: ["is-left"]
-  defp icon_classes(_, :right), do: ["is-right"]
+  defp icon_align_classes(nil, _), do: []
+  defp icon_align_classes(_, :left), do: ["is-left"]
+  defp icon_align_classes(_, :right), do: ["is-right"]
+  defp icon_size_classes(nil, _), do: []
+  defp icon_size_classes(_, size), do: ["is-#{size}"]
 end
