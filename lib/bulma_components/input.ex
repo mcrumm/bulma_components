@@ -98,6 +98,9 @@ defmodule BulmaComponents.Input do
           />
           <%= @label %>
         </label>
+
+        <.icon :if={@icon} name={@icon} size={@icon_size} align={@icon_align} color={@icon_color} />
+        <.error_icon errors={@errors} />
       </div>
       <.error :for={msg <- @errors}><%= msg %></.error>
     </div>
@@ -117,15 +120,8 @@ defmodule BulmaComponents.Input do
           </select>
         </div>
 
-        <.icon :if={@icon} name={@icon} align={@icon_align} />
-        <.icon
-          :if={@errors}
-          name="exclamation-triangle"
-          size={:small}
-          align={:right}
-          color="danger"
-          class="phx-no-feedback:hidden"
-        />
+        <.icon :if={@icon} name={@icon} size={@icon_size} align={@icon_align} color={@icon_color} />
+        <.error_icon errors={@errors} />
       </div>
       <.error :for={msg <- @errors}><%= msg %></.error>
     </div>
@@ -138,8 +134,11 @@ defmodule BulmaComponents.Input do
       <div class={control_classes(assigns)}>
         <.label for={@id}><%= @label %></.label>
         <textarea id={@id} name={@name} class={input_classes(assigns)} {@rest}>
-        <%= Form.normalize_value("textarea", @value) %>
-      </textarea>
+          <%= Form.normalize_value("textarea", @value) %>
+        </textarea>
+
+        <.icon :if={@icon} name={@icon} size={@icon_size} align={@icon_align} color={@icon_color} />
+        <.error_icon errors={@errors} />
       </div>
       <.error :for={msg <- @errors}><%= msg %></.error>
     </div>
@@ -160,6 +159,9 @@ defmodule BulmaComponents.Input do
           class={input_classes(assigns)}
           {@rest}
         />
+
+        <.icon :if={@icon} name={@icon} size={@icon_size} align={@icon_align} color={@icon_color} />
+        <.icon :if={@errors != []} name="exclamation-triangle" align={:right} color="danger" />
       </div>
       <.error :for={msg <- @errors}><%= msg %></.error>
     </div>
