@@ -41,6 +41,7 @@ defmodule BulmaComponents.Icon do
 
   def icon_classes(assigns) do
     ["icon"] ++
+      [assigns.class] ++
       color_class(assigns.color) ++
       icon_size_class(assigns.size) ++
       fixed_width_class(assigns.fixed_width) ++
