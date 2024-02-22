@@ -1,0 +1,7 @@
+@charset "utf-8";
+@import "bulma";
+
+.psb-sandbox {
+  @extend .is-family-sans-serif;
+  font: $family-primary !important;
+}

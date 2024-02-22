@@ -1,9 +1,9 @@
 defmodule Storybook.CoreComponents.Input do
   use PhoenixStorybook.Story, :component
-  alias StorybookWeb.CoreComponents
+  alias BulmaComponents.{Form, Input}
 
-  def function, do: &CoreComponents.input/1
-  def imports, do: [{CoreComponents, [simple_form: 1]}]
+  def function, do: &Input.input/1
+  def imports, do: [{Form, [simple_form: 1]}]
 
   def template do
     """
@@ -18,7 +18,7 @@ defmodule Storybook.CoreComponents.Input do
       %VariationGroup{
         id: :basic_inputs,
         variations:
-          for type <- ~w(text textarea number date color range checkbox)a do
+          for type <- ~w(text email textarea number date color range checkbox)a do
             %Variation{
               id: type,
               attributes: %{
