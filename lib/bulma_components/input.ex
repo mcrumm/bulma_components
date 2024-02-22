@@ -143,8 +143,8 @@ defmodule BulmaComponents.Input do
   def input(assigns) do
     ~H"""
     <div class="field" phx-feedback-for={@name}>
+      <.label for={@id}><%= @label %></.label>
       <div class={control_classes(assigns)}>
-        <.label for={@id}><%= @label %></.label>
         <input
           type={@type}
           name={@name}
