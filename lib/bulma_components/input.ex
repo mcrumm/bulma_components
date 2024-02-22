@@ -111,9 +111,11 @@ defmodule BulmaComponents.Input do
 
         <.icon :if={@icon} name={@icon} align={@icon_align} />
         <.icon
+          :if={@errors}
           name="exclamation-triangle"
           size={:small}
           align={:right}
+          color="danger"
           class="phx-no-feedback:hidden"
         />
       </div>
