@@ -228,10 +228,9 @@ defmodule BulmaComponents.Input do
       control_icon_classes(assigns.icon, assigns.errors, assigns.icon_align)
   end
 
-  defp control_icon_classes(nil, [], _), do: []
+  defp control_icon_classes(nil, _, _), do: ["has-icons-right"]
   defp control_icon_classes(_, _, :left), do: ["has-icons-left", "has-icons-right"]
   defp control_icon_classes(_, _, :right), do: ["has-icons-right"]
-  defp control_icon_classes(nil, _, _), do: []
 
   defp error_classes([]), do: []
   defp error_classes(_), do: ["is-danger"]
