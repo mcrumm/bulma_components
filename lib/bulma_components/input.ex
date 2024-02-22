@@ -235,10 +235,21 @@ defmodule BulmaComponents.Input do
   end
 
   defp input_classes(assigns) do
-    ["input"] ++
+    input_class(assigns) ++
       error_classes(assigns.errors) ++
-      icon_classes(assigns.icon, assigns.icon_align)
+      icon_align_classes(assigns.icon, assigns.icon_align) ++
+      icon_size_classes(assigns.icon, assigns.icon_size) ++
+      color_classes(assigns)
   end
+
+  defp color_classes(%{color: color}), do: ["is-#{color}"]
+  defp color_classes(_), do: []
+
+  def input_class(%{type: :checkbox}), do: []
+  def input_class(%{type: "checkbox"}), do: []
+  def input_class(%{type: :textarea}), do: ["textarea"]
+  def input_class(%{type: "textarea"}), do: ["textarea"]
+  def input_class(%{type: _}), do: ["input"]
 
   defp control_classes(assigns) do
     ["control"] ++
