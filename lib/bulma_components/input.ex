@@ -33,7 +33,6 @@ defmodule BulmaComponents.Input do
       <.input name="my-input" errors={["oh no!"]} />
   """
   attr :id, :any, default: nil
-  attr :name, :any
   attr :label, :string, default: nil
   attr :value, :any
 
