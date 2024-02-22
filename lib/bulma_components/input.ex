@@ -52,6 +52,7 @@ defmodule BulmaComponents.Input do
   attr :multiple, :boolean, default: false, doc: "the multiple flag for select inputs"
   attr :icon, :string, default: nil, doc: "the icon to render next to the input"
   attr :icon_align, :atom, default: :left, values: [:left, :right], doc: "the icon alignment"
+  attr :color, :string, default: nil, doc: "the color of the input"
 
   attr :rest, :global,
     include: ~w(accept autocomplete capture cols disabled form list max maxlength min minlength
