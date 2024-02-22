@@ -52,6 +52,13 @@ defmodule BulmaComponents.Input do
   attr :multiple, :boolean, default: false, doc: "the multiple flag for select inputs"
   attr :icon, :string, default: nil, doc: "the icon to render next to the input"
   attr :icon_align, :atom, default: :left, values: [:left, :right], doc: "the icon alignment"
+  attr :icon_color, :string, default: nil, doc: "the color of the icon"
+
+  attr :icon_size, :atom,
+    default: nil,
+    values: [:small, nil, :medium, :large],
+    doc: "the icon size"
+
   attr :color, :string, default: nil, doc: "the color of the input"
 
   attr :rest, :global,
