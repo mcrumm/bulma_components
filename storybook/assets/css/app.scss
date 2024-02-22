@@ -1,0 +1,11 @@
+@charset "utf-8";
+@use "bulma";
+
+/* This file is for your main application CSS */
+$phoenix-orange: #f05423;
+
+.head {
+  h1 {
+    color: $phoenix-orange;
+  }
+}

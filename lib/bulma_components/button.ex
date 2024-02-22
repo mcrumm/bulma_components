@@ -1,8 +1,11 @@
-defmodule BulmaComponents.Elements do
+defmodule BulmaComponents.Button do
   @moduledoc """
-  Element components.
+  Button component.
   """
   use Phoenix.Component
+  alias BulmaComponents.Colors
+
+  def imports, do: [{BulmaComponents.Icon, [icon: 1]}]
 
   @doc """
   Renders a button element.
@@ -35,13 +38,15 @@ defmodule BulmaComponents.Elements do
   attr :size, :atom, default: nil, values: [nil, :small, :normal, :medium, :large]
   attr :responsive, :boolean, default: false, doc: "Different sizes for each breakpoint"
   # Colors
-  attr :color, :atom, default: nil, values: [nil | BulmaComponents.colors()]
+  attr :color, :atom, default: nil, values: [nil | Colors.colors()]
   attr :light, :boolean, default: false, doc: "Light color variant"
   # States
   attr :hovered, :boolean, default: false
   attr :focused, :boolean, default: false
   attr :active, :boolean, default: false
   attr :loading, :boolean, default: false
+  attr :disabled, :boolean, default: false
+
   # Rest
   attr :rest, :global, include: ~w(disabled)
 
@@ -53,7 +58,8 @@ defmodule BulmaComponents.Elements do
     :hovered,
     :focused,
     :active,
-    :loading
+    :loading,
+    :disabled
   ]
 
   @is_value_attrs [

@@ -1,7 +1,10 @@
-defmodule Storybook.Components.Button do
-  use PhxLiveStorybook.Story, :component
+defmodule Storybook.CoreComponents.Button do
+  use PhoenixStorybook.Story, :component
+  alias BulmaComponents.{Button, Colors}
+  alias Phoenix.Naming
+  def imports, do: [{BulmaComponents.Icon, [icon: 1]}]
 
-  def function, do: &BulmaComponents.Elements.button/1
+  def function, do: &Button.button/1
 
   def variations do
     List.flatten([
@@ -16,14 +19,14 @@ defmodule Storybook.Components.Button do
   defp color_variation_groups do
     [
       %VariationGroup{
-        id: :colors_rgb,
+        id: :colors_theme,
         description: "Colors",
         variations:
-          for color <- BulmaComponents.rgb() do
+          for color <- Colors.theme() do
             %Variation{
               id: :"btn_#{color}",
               attributes: %{color: color},
-              slots: [Phoenix.Naming.humanize(color)]
+              slots: [Naming.humanize(color)]
             }
           end
       },
@@ -31,11 +34,11 @@ defmodule Storybook.Components.Button do
         id: :colors_light,
         description: "Colors: Light",
         variations:
-          for color <- BulmaComponents.rgb() do
+          for color <- Colors.theme() do
             %Variation{
               id: :"btn_#{color}",
               attributes: %{color: color, light: true},
-              slots: [Phoenix.Naming.humanize(color)]
+              slots: [Naming.humanize(color)]
             }
           end
       },
@@ -43,11 +46,11 @@ defmodule Storybook.Components.Button do
         id: :colors_monochrome,
         description: "Colors: Monochrome",
         variations:
-          for color <- BulmaComponents.monochrome() do
+          for color <- Colors.monochrome() do
             %Variation{
               id: :"btn_#{color}",
               attributes: %{color: color},
-              slots: [Phoenix.Naming.humanize(color)]
+              slots: [Naming.humanize(color)]
             }
           end
       }
@@ -93,7 +96,7 @@ defmodule Storybook.Components.Button do
           id: :"styles_#{style}",
           description: "Styles: #{name}",
           variations:
-            for color <- BulmaComponents.rgb() do
+            for color <- Colors.theme() do
               %Variation{
                 id: :"btn_style_#{style}_#{color}",
                 attributes: %{style => true, color: color},
@@ -109,7 +112,7 @@ defmodule Storybook.Components.Button do
           id: :styles_invert_outlined,
           description: "Styles: Invert Outlined",
           variations:
-            for color <- BulmaComponents.rgb() do
+            for color <- Colors.theme() do
               %Variation{
                 id: :"btn_style_outlined_#{color}",
                 attributes: %{inverted: true, outlined: true, color: color},
@@ -128,7 +131,7 @@ defmodule Storybook.Components.Button do
         id: :"states_#{state}",
         description: name,
         variations:
-          for color <- [nil | BulmaComponents.rgb()] do
+          for color <- [nil | Colors.theme()] do
             %Variation{
               id: :"btn_state_hover_#{color}",
               attributes: if(color, do: %{state => true, color: color}, else: %{state => true}),
@@ -150,9 +153,7 @@ defmodule Storybook.Components.Button do
               attributes: if(size, do: %{size: size}, else: %{}),
               slots: [
                 """
-                <span class="icon is-small">
-                  <i class="fa-solid fa-book"></i>
-                </span>
+                <.icon size={:small} name={:book} />
                 """
               ]
             }
@@ -167,10 +168,7 @@ defmodule Storybook.Components.Button do
               attributes: if(size, do: %{size: size}, else: %{}),
               slots: [
                 """
-                <span class="icon is-small">
-                  <i class="fa-solid fa-book"></i>
-                </span>
-                <span>Book</span>
+                <.icon size={:small} name={:book} title={:Book}/>
                 """
               ]
             }
