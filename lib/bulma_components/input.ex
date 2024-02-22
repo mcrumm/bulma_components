@@ -89,7 +89,7 @@ defmodule BulmaComponents.Input do
           <input type="hidden" name={@name} value="false" />
           <input
             type="checkbox"
-            class="checkbox"
+            class={input_classes(assigns)}
             id={@id}
             name={@name}
             value="true"
