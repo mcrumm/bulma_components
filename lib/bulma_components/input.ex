@@ -100,11 +100,15 @@ defmodule BulmaComponents.Input do
     ~H"""
     <div phx-feedback-for={@name} class="field">
       <.label for={@id}><%= @label %></.label>
-      <div class="control">
-        <select id={@id} name={@name} multiple={@multiple} {@rest}>
-          <option :if={@prompt} value=""><%= @prompt %></option>
-          <%= Form.options_for_select(@options, @value) %>
-        </select>
+
+      <div class={control_classes(assigns)}>
+        <div class="select">
+          <select id={@id} name={@name} class="select" multiple={@multiple} {@rest}>
+            <option :if={@prompt} value=""><%= @prompt %></option>
+            <%= Form.options_for_select(@options, @value) %>
+          </select>
+        </div>
+
         <.icon :if={@icon} name={@icon} align={@icon_align} />
         <.icon
           name="exclamation-triangle"
