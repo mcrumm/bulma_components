@@ -195,9 +195,14 @@ defmodule BulmaComponents.Input do
     """
   end
 
+  @doc """
+  Renders an error icon.
+  """
+  attr :errors, :list, default: []
+
   def error_icon(assigns) do
     ~H"""
-    <.icon name="exclamation-triangle" size={:small} align={:right} class="phx-no-feedback:hidden" />
+    <.icon :if={@errors} name="exclamation-triangle" color="danger" size={:small} align={:right} />
     """
   end
 
