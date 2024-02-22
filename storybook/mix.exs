@@ -59,7 +59,8 @@ defmodule Storybook.MixProject do
       {:plug_cowboy, "~> 2.6"},
       {:swoosh, "~> 1.14"},
       {:telemetry_metrics, "~> 0.6"},
-      {:telemetry_poller, "~> 1.0"}
+      {:telemetry_poller, "~> 1.0"},
+      {:uuid, "~> 1.1"}
     ]
   end
 

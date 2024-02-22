@@ -4,7 +4,6 @@ defmodule BulmaComponents.Modal do
   """
   use Phoenix.Component
   alias Phoenix.LiveView.JS
-  import BulmaComponents.Icon
 
   @doc """
   Renders a modal.

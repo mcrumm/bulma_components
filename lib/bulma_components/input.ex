@@ -52,6 +52,14 @@ defmodule BulmaComponents.Input do
   attr :multiple, :boolean, default: false, doc: "the multiple flag for select inputs"
   attr :icon, :string, default: nil, doc: "the icon to render next to the input"
   attr :icon_align, :atom, default: :left, values: [:left, :right], doc: "the icon alignment"
+  attr :icon_color, :string, default: nil, doc: "the color of the icon"
+
+  attr :icon_size, :atom,
+    default: nil,
+    values: [:small, nil, :medium, :large],
+    doc: "the icon size"
+
+  attr :color, :string, default: nil, doc: "the color of the input"
 
   attr :rest, :global,
     include: ~w(accept autocomplete capture cols disabled form list max maxlength min minlength
@@ -81,7 +89,7 @@ defmodule BulmaComponents.Input do
           <input type="hidden" name={@name} value="false" />
           <input
             type="checkbox"
-            class="checkbox"
+            class={input_classes(assigns)}
             id={@id}
             name={@name}
             value="true"
@@ -90,6 +98,9 @@ defmodule BulmaComponents.Input do
           />
           <%= @label %>
         </label>
+
+        <.icon :if={@icon} name={@icon} size={@icon_size} align={@icon_align} color={@icon_color} />
+        <.error_icon errors={@errors} />
       </div>
       <.error :for={msg <- @errors}><%= msg %></.error>
     </div>
@@ -100,18 +111,17 @@ defmodule BulmaComponents.Input do
     ~H"""
     <div phx-feedback-for={@name} class="field">
       <.label for={@id}><%= @label %></.label>
-      <div class="control">
-        <select id={@id} name={@name} multiple={@multiple} {@rest}>
-          <option :if={@prompt} value=""><%= @prompt %></option>
-          <%= Form.options_for_select(@options, @value) %>
-        </select>
-        <.icon :if={@icon} name={@icon} align={@icon_align} />
-        <.icon
-          name="exclamation-triangle"
-          size={:small}
-          align={:right}
-          class="phx-no-feedback:hidden"
-        />
+
+      <div class={control_classes(assigns)}>
+        <div class="select">
+          <select id={@id} name={@name} class="select" multiple={@multiple} {@rest}>
+            <option :if={@prompt} value=""><%= @prompt %></option>
+            <%= Form.options_for_select(@options, @value) %>
+          </select>
+        </div>
+
+        <.icon :if={@icon} name={@icon} size={@icon_size} align={@icon_align} color={@icon_color} />
+        <.error_icon errors={@errors} />
       </div>
       <.error :for={msg <- @errors}><%= msg %></.error>
     </div>
@@ -124,8 +134,11 @@ defmodule BulmaComponents.Input do
       <div class={control_classes(assigns)}>
         <.label for={@id}><%= @label %></.label>
         <textarea id={@id} name={@name} class={input_classes(assigns)} {@rest}>
-        <%= Form.normalize_value("textarea", @value) %>
-      </textarea>
+          <%= Form.normalize_value("textarea", @value) %>
+        </textarea>
+
+        <.icon :if={@icon} name={@icon} size={@icon_size} align={@icon_align} color={@icon_color} />
+        <.error_icon errors={@errors} />
       </div>
       <.error :for={msg <- @errors}><%= msg %></.error>
     </div>
@@ -136,8 +149,8 @@ defmodule BulmaComponents.Input do
   def input(assigns) do
     ~H"""
     <div class="field" phx-feedback-for={@name}>
+      <.label for={@id}><%= @label %></.label>
       <div class={control_classes(assigns)}>
-        <.label for={@id}><%= @label %></.label>
         <input
           type={@type}
           name={@name}
@@ -146,6 +159,9 @@ defmodule BulmaComponents.Input do
           class={input_classes(assigns)}
           {@rest}
         />
+
+        <.icon :if={@icon} name={@icon} size={@icon_size} align={@icon_align} color={@icon_color} />
+        <.icon :if={@errors != []} name="exclamation-triangle" align={:right} color="danger" />
       </div>
       <.error :for={msg <- @errors}><%= msg %></.error>
     </div>
@@ -179,9 +195,14 @@ defmodule BulmaComponents.Input do
     """
   end
 
+  @doc """
+  Renders an error icon.
+  """
+  attr :errors, :list, default: []
+
   def error_icon(assigns) do
     ~H"""
-    <.icon name="exclamation-triangle" size={:small} align={:right} class="phx-no-feedback:hidden" />
+    <.icon :if={@errors} name="exclamation-triangle" color="danger" size={:small} align={:right} />
     """
   end
 
@@ -214,25 +235,37 @@ defmodule BulmaComponents.Input do
   end
 
   defp input_classes(assigns) do
-    ["input"] ++
+    input_class(assigns) ++
       error_classes(assigns.errors) ++
-      icon_classes(assigns.icon, assigns.icon_align)
+      icon_align_classes(assigns.icon, assigns.icon_align) ++
+      icon_size_classes(assigns.icon, assigns.icon_size) ++
+      color_classes(assigns)
   end
+
+  defp color_classes(%{color: color}), do: ["is-#{color}"]
+  defp color_classes(_), do: []
+
+  def input_class(%{type: :checkbox}), do: []
+  def input_class(%{type: "checkbox"}), do: []
+  def input_class(%{type: :textarea}), do: ["textarea"]
+  def input_class(%{type: "textarea"}), do: ["textarea"]
+  def input_class(%{type: _}), do: ["input"]
 
   defp control_classes(assigns) do
     ["control"] ++
       control_icon_classes(assigns.icon, assigns.errors, assigns.icon_align)
   end
 
-  defp control_icon_classes(nil, [], _), do: []
+  defp control_icon_classes(nil, _, _), do: ["has-icons-right"]
   defp control_icon_classes(_, _, :left), do: ["has-icons-left", "has-icons-right"]
   defp control_icon_classes(_, _, :right), do: ["has-icons-right"]
-  defp control_icon_classes(nil, _, _), do: []
 
   defp error_classes([]), do: []
   defp error_classes(_), do: ["is-danger"]
 
-  defp icon_classes(nil, _), do: []
-  defp icon_classes(_, :left), do: ["is-left"]
-  defp icon_classes(_, :right), do: ["is-right"]
+  defp icon_align_classes(nil, _), do: []
+  defp icon_align_classes(_, :left), do: ["is-left"]
+  defp icon_align_classes(_, :right), do: ["is-right"]
+  defp icon_size_classes(nil, _), do: []
+  defp icon_size_classes(_, size), do: ["is-#{size}"]
 end
