@@ -14,6 +14,7 @@ defmodule BulmaComponents.MixProject do
       deps: deps(),
       package: package(),
       docs: docs(),
+      aliases: aliases(),
       preferred_cli_env: [
         docs: :docs,
         "hex.publish": :docs
@@ -66,6 +67,13 @@ defmodule BulmaComponents.MixProject do
         "README.md",
         "CHANGELOG.md"
       ]
+    ]
+  end
+
+  defp aliases do
+    [
+      setup: ["cmd --cd storybook mix setup"],
+      "phx.server": ["cmd --cd storybook mix phx.server"]
     ]
   end
 end
