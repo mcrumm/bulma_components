@@ -81,7 +81,7 @@ defmodule BulmaComponents.Input do
           <input type="hidden" name={@name} value="false" />
           <input
             type="checkbox"
-            class="input"
+            class="checkbox"
             id={@id}
             name={@name}
             value="true"
